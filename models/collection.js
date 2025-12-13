@@ -2,20 +2,20 @@ const { json } = require('body-parser');
 const { poolPromise } = require('../util/db');
 const { sql } = require('../util/db');
 
-async function findItem(id) {
+async function findItem(endPoint, id) {
 	var p_input_json = `[{"item_id": "${id}"}]`
 
 	const pool = await poolPromise
 	const result = await pool.request()
 		.input('p_input_json', sql.NVarChar(sql.MAX), p_input_json)
-		.execute('COLLECTION.r_OS_EXPLORER')
+		.execute(endPoint)
 
 	return result.recordsets[0];
-
 }
 
 module.exports = class OSMap {
 
+	/*
 	constructor(id, title, imageUrl, description, price) {
 		this.item_id = item_id;
 		this.key_value = key_value;
@@ -25,7 +25,8 @@ module.exports = class OSMap {
 		this.publish_date = publish_date;
 		this.map_image = map_image;
 	}
-
+	*/
+	
 	save() {
 		/*
 		return db.execute(
@@ -39,12 +40,12 @@ module.exports = class OSMap {
 	static deleteById(id) {	
 	}
 
-	static async fetchAll() {
-		return findItem(-1);
+	static async fetchAll(endPoint) {
+		return findItem(endPoint, -1);
 	}
 
-	static async findById(id) {
-		return findItem(id);
+	static async findById(endPoint, id) {
+		return findItem(endPoint, id);
 	}
 
 };

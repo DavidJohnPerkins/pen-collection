@@ -1,5 +1,5 @@
-const Product = require('../models/os_map');
-
+const collection = require('../models/collection');
+/*
 exports.getItems = (req, res, next) => {
 	Product.fetchAll()
 		.then((rows) => {
@@ -11,26 +11,79 @@ exports.getItems = (req, res, next) => {
 		})
 		.catch(err => console.log(err));
 };
-
-exports.getItem = (req, res, next) => {
+*/
+exports.getExplorerItem = (req, res, next) => {
 	const itemId = req.params.itemId;
-	Product.findById(itemId)
+	collection.findById('COLLECTION.r_OS_EXPLORER', itemId)
 		.then(([item]) => {
-			res.render('main-page/product-detail', {
+			res.render('main-page/map-detail', {
 				item: item,
 				pageTitle: item.map_title,
-				path: '/product'
+				path: '/item'
 			});
 		})
     	.catch(err => console.log(err));
 };
 
-exports.getIndex = (req, res, next) => {
-	Product.fetchAll()
+exports.getExplorerIndex = (req, res, next) => {
+	collection.fetchAll('COLLECTION.r_OS_EXPLORER')
 		.then((rows) => {
-			res.render('main-page/os-map-list', {
+			res.render('main-page/map-list', {
 				items: rows,
 				pageTitle: 'OS Explorer List',
+				mapType: 'explorer',
+				path: '/'
+			});
+		})
+    	.catch(err => console.log(err));
+};
+
+exports.getLandrangerItem = (req, res, next) => {
+	const itemId = req.params.itemId;
+	collection.findById('COLLECTION.r_OS_LANDRANGER', itemId)
+		.then(([item]) => {
+			res.render('main-page/map-detail', {
+				item: item,
+				pageTitle: item.map_title,
+				path: '/item'
+			});
+		})
+    	.catch(err => console.log(err));
+};
+
+exports.getLandrangerIndex = (req, res, next) => {
+	collection.fetchAll('COLLECTION.r_OS_LANDRANGER')
+		.then((rows) => {
+			res.render('main-page/map-list', {
+				items: rows,
+				pageTitle: 'OS Landranger List',
+				mapType: 'landranger',
+				path: '/'
+			});
+		})
+    	.catch(err => console.log(err));
+};
+
+exports.getPenItem = (req, res, next) => {
+	const itemId = req.params.itemId;
+	collection.findById('COLLECTION.r_PEN_COLLECTION', itemId)
+		.then(([item]) => {
+			res.render('main-page/pen-detail', {
+				item: item,
+				pageTitle: `${item.BRAND} - ${item.MODEL_NAME}`,
+				path: '/item'
+			});
+		})
+    	.catch(err => console.log(err));
+};
+
+exports.getPenIndex = (req, res, next) => {
+	collection.fetchAll('COLLECTION.r_PEN_COLLECTION')
+		.then((rows) => {
+			res.render('main-page/pen-list', {
+				items: rows,
+				pageTitle: 'Pen Collection',
+				mapType: 'landranger',
 				path: '/'
 			});
 		})

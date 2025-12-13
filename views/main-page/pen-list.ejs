@@ -1,5 +1,5 @@
 <%- include('../includes/head.ejs') %>
-	<link rel="stylesheet" href="/css/product.css">
+	<link rel="stylesheet" href="/css/collection-item.css">
 	</head>
 
 	<body>
@@ -12,28 +12,25 @@
 							<article class="card map-item">
 								<header class="map__header">
 									<h1 class="map__title">
-										<%= item.map_title %>
+										<%= item.BRAND %>
 									</h1>
+									<h2 class="map__title">
+										<%= item.MODEL_NAME %>
+									</h2>
+									<h2 class="map__title">
+										<%= item.BODY_COLOUR %>
+									</h2>
 								</header>
-								<div class="map__image">
-									<img src="<%= item.map_image %>" alt="<%= item.map_title %>">
+								<div class="pen__image">
+									<img src="pen-image/<%= item.IMAGE_1 %>" alt="<%= item.MODEL_NAME %>">
 								</div>
 								<div class="card__content">
 									<p class="map_id">
 										Id: <%= item.item_id %>
 									</p>
-									<h2 class="map__number">
-										<%= item.map_number %>
-									</h2>
-									<p class="map__settlements">
-										<%= item.main_settlements %>
-									</p>
-									<p class="map__publishdate">
-										<%= item.publish_date %>
-									</p>
 								</div>
 								<div class="card__actions">
-									<a href="/products/<%= item.item_id %>" class="btn">Details</a>
+									<a href="/penItem/<%= item.item_id %>" class="btn">Details</a>
 								</div>
 							</article>
 							<% } %>

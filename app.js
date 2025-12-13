@@ -8,6 +8,8 @@ const errorController = require('./controllers/error');
 
 const app = express();
 
+app.use('/pen-image', express.static(path.join(__dirname, '../../../public/pen-image')));
+
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 

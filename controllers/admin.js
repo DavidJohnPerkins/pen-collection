@@ -1,4 +1,4 @@
-const Product = require('../models/os_map');
+const Product = require('../models/collection');
 
 exports.getAddProduct = (req, res, next) => {
   res.render('admin/edit-product', {

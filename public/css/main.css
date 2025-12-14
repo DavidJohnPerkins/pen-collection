@@ -28,11 +28,11 @@ form {
   padding: 1rem 1rem;
   vertical-align: middle;
 }
-.child__left {
-  width: 40%;
+.child__map {
+  width: 30%;
 }
 .child__right {
-  width: 40%;
+  width: 30%;
 }
 
 .centered {

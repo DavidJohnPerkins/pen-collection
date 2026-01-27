@@ -17,6 +17,9 @@ router.get('/landrangerItem/:itemId', displayController.getLandrangerItem);
 router.get('/pen', displayController.getPenIndex);
 router.get('/penItem/:itemId', displayController.getPenItem);
 
+router.get('/ink', displayController.getInkIndex);
+router.get('/inkItem/:itemId', displayController.getInkItem);
+
 /*
 router.get('/cart', displayController.getCart);
 

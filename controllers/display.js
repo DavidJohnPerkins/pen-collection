@@ -83,7 +83,31 @@ exports.getPenIndex = (req, res, next) => {
 			res.render('main-page/pen-list', {
 				items: rows,
 				pageTitle: 'Pen Collection',
-				mapType: 'landranger',
+				path: '/'
+			});
+		})
+    	.catch(err => console.log(err));
+};
+
+exports.getInkItem = (req, res, next) => {
+	const itemId = req.params.itemId;
+	collection.findById('COLLECTION.r_INK_COLLECTION', itemId)
+		.then(([item]) => {
+			res.render('main-page/ink-detail', {
+				item: item,
+				pageTitle: `${item.BRAND} - ${item.MODEL_NAME}`,
+				path: '/item'
+			});
+		})
+    	.catch(err => console.log(err));
+};
+
+exports.getInkIndex = (req, res, next) => {
+	collection.fetchAll('COLLECTION.r_INK_COLLECTION')
+		.then((rows) => {
+			res.render('main-page/ink-list', {
+				items: rows,
+				pageTitle: 'Ink Collection',
 				path: '/'
 			});
 		})

@@ -9,6 +9,7 @@ const errorController = require('./controllers/error');
 const app = express();
 
 app.use('/pen-image', express.static(path.join(__dirname, '../../../public/pen-image')));
+app.use('/ink-image', express.static(path.join(__dirname, '../../../public/ink-image')));
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');

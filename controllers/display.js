@@ -1,21 +1,11 @@
 const collection = require('../models/collection');
-/*
-exports.getItems = (req, res, next) => {
-	Product.fetchAll()
-		.then((rows) => {
-			res.render('main-page/os-map-list', {
-				items: rows,
-				pageTitle: 'All OS Explorer Maps',
-				path: '/'
-			});
-		})
-		.catch(err => console.log(err));
-};
-*/
-exports.getExplorerItem = (req, res, next) => {
+const dbfunc = require('../util/db_function');
+
+exports.getOSMapItem = (req, res, next) => {
+	const range = req.params.range;
 	const itemId = req.params.itemId;
-	collection.findById('COLLECTION.r_OS_EXPLORER', itemId)
-		.then(([item]) => {
+	dbfunc.getData(`http://localhost:8080/api/collection/maps/${range}/${itemId}`)
+		.then((item) => {
 			res.render('main-page/map-detail', {
 				item: item,
 				pageTitle: item.map_title,
@@ -25,39 +15,17 @@ exports.getExplorerItem = (req, res, next) => {
     	.catch(err => console.log(err));
 };
 
-exports.getExplorerIndex = (req, res, next) => {
-	collection.fetchAll('COLLECTION.r_OS_EXPLORER')
+exports.getOSMapIndex = (req, res, next) => {
+	var range = req.params.range ?? '';
+	if (range === '') {
+		range = 'EXPLORER';
+	}
+	dbfunc.getData(`http://localhost:8080/api/collection/maps/${range}`)
 		.then((rows) => {
 			res.render('main-page/map-list', {
 				items: rows,
-				pageTitle: 'OS Explorer List',
-				mapType: 'explorer',
-				path: '/'
-			});
-		})
-    	.catch(err => console.log(err));
-};
-
-exports.getLandrangerItem = (req, res, next) => {
-	const itemId = req.params.itemId;
-	collection.findById('COLLECTION.r_OS_LANDRANGER', itemId)
-		.then(([item]) => {
-			res.render('main-page/map-detail', {
-				item: item,
-				pageTitle: item.map_title,
-				path: '/item'
-			});
-		})
-    	.catch(err => console.log(err));
-};
-
-exports.getLandrangerIndex = (req, res, next) => {
-	collection.fetchAll('COLLECTION.r_OS_LANDRANGER')
-		.then((rows) => {
-			res.render('main-page/map-list', {
-				items: rows,
-				pageTitle: 'OS Landranger List',
-				mapType: 'landranger',
+				pageTitle: `OS ${range} List`,
+				mapType: range,
 				path: '/'
 			});
 		})

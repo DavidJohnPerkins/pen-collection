@@ -6,13 +6,13 @@ const displayController = require('../controllers/display');
 
 const router = express.Router();
 
-router.get('/', displayController.getExplorerIndex);
+router.get('/', displayController.getOSMapIndex);
 
-router.get('/explorer', displayController.getExplorerIndex);
-router.get('/explorerItem/:itemId', displayController.getExplorerItem);
+router.get('/maps/:range', displayController.getOSMapIndex);
+router.get('/maps/:range/:itemId', displayController.getOSMapItem);
 
-router.get('/landranger', displayController.getLandrangerIndex);
-router.get('/landrangerItem/:itemId', displayController.getLandrangerItem);
+//router.get('/landranger', displayController.getLandrangerIndex);
+//router.get('/landrangerItem/:itemId', displayController.getLandrangerItem);
 
 router.get('/pen', displayController.getPenIndex);
 router.get('/penItem/:itemId', displayController.getPenItem);

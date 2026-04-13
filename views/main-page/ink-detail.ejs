@@ -1,0 +1,32 @@
+<%- include('../includes/head.ejs') %>
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/collection-item.css">
+	</head>
+
+	<body>
+		<%- include('../includes/navigation.ejs') %>
+		<main class="centered">
+			<h1><%= item.INK_NAME %></h1>
+			<hr>
+			<div class="parent">
+				<div class="child child__map">
+					<div class="map__detail__image">
+						<img src="<%= item.IMAGE_1 %>" alt="<%= item.INK_NAME %>">
+					</div>
+				</div>
+				<div class="child child__map">
+					<div class="map__detail__image">
+						<img src="<%= item.IMAGE_1 %>" alt="<%= item.INK_NAME %>">
+					</div>
+				</div>
+				<div class="child child__map">
+					<div class="map__detail__image">
+						<img src="<%= item.IMAGE_1 %>" alt="<%= item.INK_NAME %>">
+					</div>
+				</div>
+				</div>
+			</div>
+			<h2><%= item.CONTAINER %></h2>
+			<p><%= item.BRAND %></p>
+		</main>
+		<%- include('../includes/end.ejs') %>

@@ -46,7 +46,7 @@ exports.getPenItem = (req, res, next) => {
 };
 
 exports.getPenIndex = (req, res, next) => {
-	collection.fetchAll('COLLECTION.r_PEN_COLLECTION')
+	dbfunc.getData(`http://localhost:8080/api/collection/pens`)
 		.then((rows) => {
 			res.render('main-page/pen-list', {
 				items: rows,
@@ -59,11 +59,11 @@ exports.getPenIndex = (req, res, next) => {
 
 exports.getInkItem = (req, res, next) => {
 	const itemId = req.params.itemId;
-	collection.findById('COLLECTION.r_INK_COLLECTION', itemId)
-		.then(([item]) => {
+	dbfunc.getData(`http://localhost:8080/api/collection/inks/${itemId}`)
+		.then((item) => {
 			res.render('main-page/ink-detail', {
 				item: item,
-				pageTitle: `${item.BRAND} - ${item.MODEL_NAME}`,
+				pageTitle: `${item.BRAND} - ${item.INK_NAME}`,
 				path: '/item'
 			});
 		})
@@ -71,7 +71,7 @@ exports.getInkItem = (req, res, next) => {
 };
 
 exports.getInkIndex = (req, res, next) => {
-	collection.fetchAll('COLLECTION.r_INK_COLLECTION')
+	dbfunc.getData(`http://localhost:8080/api/collection/inks`)
 		.then((rows) => {
 			res.render('main-page/ink-list', {
 				items: rows,
@@ -81,6 +81,7 @@ exports.getInkIndex = (req, res, next) => {
 		})
     	.catch(err => console.log(err));
 };
+
 /*
 exports.getCart = (req, res, next) => {
 	Cart.getCart(cart => {

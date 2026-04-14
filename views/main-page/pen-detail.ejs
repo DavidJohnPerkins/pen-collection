@@ -6,15 +6,15 @@
 	<body>
 		<%- include('../includes/navigation.ejs') %>
 		<main class="centered">
-			<h1><%= item.BRAND %> - <%= item.RANGE %>: <%= item.INK_NAME %></h1>
+			<h1><%= item.BRAND %> - <%= item.RANGE %>: <%= item.MODEL_NAME %></h1>
 			<hr>
 			<div class="parent">
 				<div class="child child__map">
 					<div class="pen__image">
-						<img src="/ink-image/<%= item.IMAGE_1 %>" alt="<%= item.INK_NAME %>">
+						<img src="/pen-image/<%= item.IMAGE_1 %>" alt="<%= item.INK_NAME %>">
 					</div>
 				</div>
 			</div>
-			<h2><%= item.CONTAINER %> (<%= item.CONTAINER_SIZE %>)</h2>
+			<h2>Nib: <%= item.NIB_MATERIAL %> - <%= item.NIB_COLOUR %> finish %></h2>
 		</main>
 		<%- include('../includes/end.ejs') %>

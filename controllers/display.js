@@ -1,4 +1,4 @@
-const collection = require('../models/collection');
+//const collection = require('../models/collection_dead');
 const dbfunc = require('../util/db_function');
 
 exports.getOSMapItem = (req, res, next) => {
@@ -32,19 +32,6 @@ exports.getOSMapIndex = (req, res, next) => {
     	.catch(err => console.log(err));
 };
 
-exports.getPenItem = (req, res, next) => {
-	const itemId = req.params.itemId;
-	collection.findById('COLLECTION.r_PEN_COLLECTION', itemId)
-		.then(([item]) => {
-			res.render('main-page/pen-detail', {
-				item: item,
-				pageTitle: `${item.BRAND} - ${item.MODEL_NAME}`,
-				path: '/item'
-			});
-		})
-    	.catch(err => console.log(err));
-};
-
 exports.getPenIndex = (req, res, next) => {
 	dbfunc.getData(`http://localhost:8080/api/collection/pens`)
 		.then((rows) => {
@@ -54,20 +41,7 @@ exports.getPenIndex = (req, res, next) => {
 				path: '/'
 			});
 		})
-    	.catch(err => console.log(err));
-};
-
-exports.getInkItem = (req, res, next) => {
-	const itemId = req.params.itemId;
-	dbfunc.getData(`http://localhost:8080/api/collection/inks/${itemId}`)
-		.then((item) => {
-			res.render('main-page/ink-detail', {
-				item: item,
-				pageTitle: `${item.BRAND} - ${item.INK_NAME}`,
-				path: '/item'
-			});
-		})
-    	.catch(err => console.log(err));
+		.catch(err => console.log(err));
 };
 
 exports.getInkIndex = (req, res, next) => {
@@ -80,6 +54,32 @@ exports.getInkIndex = (req, res, next) => {
 			});
 		})
     	.catch(err => console.log(err));
+};
+
+exports.getPenItem = (req, res, next) => {
+	const itemId = req.params.itemId;
+	dbfunc.getData(`http://localhost:8080/api/collection/pens/${itemId}`)
+		.then((item) => {
+			res.render('main-page/pen-detail', {
+				item: item,
+				pageTitle: `${item.BRAND} - ${item.MODEL_NAME}`,
+				path: '/item'
+			});
+		})
+    	.catch(err => console.log(err));
+};
+
+exports.getInkItem = (req, res, next) => {
+	const itemId = req.params.itemId;
+	dbfunc.getData(`http://localhost:8080/api/collection/inks/${itemId}`)
+	 	.then((item) => {
+	 		res.render('main-page/ink-detail', {
+	 			item: item,
+	 			pageTitle: `${item.BRAND} - ${item.INK_NAME}`,
+	 			path: '/'
+	 		});
+		})
+	 	.catch(err => console.log(err));
 };
 
 /*

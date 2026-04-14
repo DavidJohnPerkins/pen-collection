@@ -4,7 +4,9 @@ const { sql } = require('../util/db');
 
 async function findItem(endPoint, id) {
 	var p_input_json = `[{"item_id": "${id}"}]`
-
+	console.log(endPoint);
+	console.log(id);
+	console.log(p_input_json);
 	const pool = await poolPromise
 	const result = await pool.request()
 		.input('p_input_json', sql.NVarChar(sql.MAX), p_input_json)

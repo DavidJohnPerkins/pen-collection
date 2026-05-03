@@ -1,10 +1,11 @@
 //const collection = require('../models/collection_dead');
 const dbfunc = require('../util/db_function');
+const { server, db } = require("../config");
 
 exports.getOSMapItem = (req, res, next) => {
 	const range = req.params.range;
 	const itemId = req.params.itemId;
-	dbfunc.getData(`http://localhost:8080/api/collection/maps/${range}/${itemId}`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/maps/${range}/${itemId}`)
 		.then((item) => {
 			res.render('main-page/map-detail', {
 				item: item,
@@ -20,7 +21,7 @@ exports.getOSMapIndex = (req, res, next) => {
 	if (range === '') {
 		range = 'EXPLORER';
 	}
-	dbfunc.getData(`http://localhost:8080/api/collection/maps/${range}`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/maps/${range}`)
 		.then((rows) => {
 			res.render('main-page/map-list', {
 				items: rows,
@@ -33,7 +34,7 @@ exports.getOSMapIndex = (req, res, next) => {
 };
 
 exports.getPenIndex = (req, res, next) => {
-	dbfunc.getData(`http://localhost:8080/api/collection/pens`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/pens`)
 		.then((rows) => {
 			res.render('main-page/pen-list', {
 				items: rows,
@@ -45,7 +46,7 @@ exports.getPenIndex = (req, res, next) => {
 };
 
 exports.getInkIndex = (req, res, next) => {
-	dbfunc.getData(`http://localhost:8080/api/collection/inks`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/inks`)
 		.then((rows) => {
 			res.render('main-page/ink-list', {
 				items: rows,
@@ -58,12 +59,12 @@ exports.getInkIndex = (req, res, next) => {
 
 exports.getPenItem = (req, res, next) => {
 	const itemId = req.params.itemId;
-	dbfunc.getData(`http://localhost:8080/api/collection/pens/${itemId}`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/pens/${itemId}`)
 		.then((item) => {
 			res.render('main-page/pen-detail', {
 				item: item,
 				pageTitle: `${item.BRAND} - ${item.MODEL_NAME}`,
-				path: '/item'
+				path: '/'
 			});
 		})
     	.catch(err => console.log(err));
@@ -71,7 +72,7 @@ exports.getPenItem = (req, res, next) => {
 
 exports.getInkItem = (req, res, next) => {
 	const itemId = req.params.itemId;
-	dbfunc.getData(`http://localhost:8080/api/collection/inks/${itemId}`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/inks/${itemId}`)
 	 	.then((item) => {
 	 		res.render('main-page/ink-detail', {
 	 			item: item,

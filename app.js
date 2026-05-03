@@ -6,8 +6,10 @@ const bodyParser = require('body-parser');
 const errorController = require('./controllers/error');
 
 const app = express();
-app.use('/pen-image', express.static(path.join(__dirname, '../../../public/pen-image')));
-app.use('/ink-image', express.static(path.join(__dirname, '../../../Public/ink-image')));
+//app.use('/pen-image', express.static(path.join(__dirname, '../../../public/collection-image/pen-image')));
+//app.use('/ink-image', express.static(path.join(__dirname, '../../../Public/collection-image/ink-image')));
+
+app.use('/images', express.static('/app/images'));
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');

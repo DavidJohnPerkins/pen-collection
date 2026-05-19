@@ -20,6 +20,9 @@ router.get('/penItem/:itemId', displayController.getPenItem);
 router.get('/ink', displayController.getInkIndex);
 router.get('/inkItem/:itemId', displayController.getInkItem);
 
+router.get('/score', displayController.getScoreIndex);
+router.get('/scoreItem/:itemId', displayController.getScoreItem);
+
 /*
 router.get('/cart', displayController.getCart);
 

@@ -12,31 +12,23 @@
 							<article class="card map-item">
 								<header class="map__header">
 									<h1 class="map__title">
-										<%= item.BRAND %>
+										<%= item.COMPOSER %>
 									</h1>
 									<h2 class="map__title">
-										<%= item.MODEL_NAME %>
+										<%= item.WORK_NAME %>
 									</h2>
 									<h2 class="map__title">
-										<%= item.BODY_COLOUR %>
+										<%= item.key_value %>
 									</h2>
 								</header>
-								<div class="pen__image">
-									<img src="images/pen-image/<%= item.IMAGE_1 %>" alt="<%= item.MODEL_NAME %>">
-								</div>
-								<div class="card__content">
-									<p class="map_id">
-										Id: <%= item.item_id %>
-									</p>
-								</div>
 								<div class="card__actions">
-									<a href="/penItem/<%= item.item_id %>" class="btn">Details</a>
-								</div>
+									<a href="/scoreItem/<%= item.item_id %>" class="btn">Details</a>
+								</div>								<header class="map__header">
 							</article>
-							<% } %>
+						<% } %>
 					</div>
 					<% } else { %>
-						<h1>No pens found</h1>
+						<h1>No scores found</h1>
 						<% } %>
 			</main>
 			<%- include('../includes/end.ejs') %>

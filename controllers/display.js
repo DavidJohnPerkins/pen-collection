@@ -57,6 +57,18 @@ exports.getInkIndex = (req, res, next) => {
     	.catch(err => console.log(err));
 };
 
+exports.getScoreIndex = (req, res, next) => {
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/scores`)
+		.then((rows) => {
+			res.render('main-page/score-list', {
+				items: rows,
+				pageTitle: 'Score Collection',
+				path: '/'
+			});
+		})
+    	.catch(err => console.log(err));
+};
+
 exports.getPenItem = (req, res, next) => {
 	const itemId = req.params.itemId;
 	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/pens/${itemId}`)
@@ -77,6 +89,19 @@ exports.getInkItem = (req, res, next) => {
 	 		res.render('main-page/ink-detail', {
 	 			item: item,
 	 			pageTitle: `${item.BRAND} - ${item.INK_NAME}`,
+	 			path: '/'
+	 		});
+		})
+	 	.catch(err => console.log(err));
+};
+
+exports.getScoreItem = (req, res, next) => {
+	const itemId = req.params.itemId;
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/scores/${itemId}`)
+	 	.then((item) => {
+	 		res.render('main-page/score-detail', {
+	 			item: item,
+	 			pageTitle: `${item.key_value}`,
 	 			path: '/'
 	 		});
 		})

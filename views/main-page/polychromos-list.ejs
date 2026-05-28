@@ -1,0 +1,42 @@
+<%- include('../includes/head.ejs') %>
+	<link rel="stylesheet" href="/css/collection-item.css">
+	</head>
+
+	<body>
+		<%- include('../includes/navigation.ejs') %>
+
+			<main>
+				<% if (items.length > 0) { %>
+					<div class="grid">
+						<% for (let item of items) { %>
+							<article class="card map-item">
+								<header class="map__header">
+									<h1 class="map__title">
+										<%= item.COLOUR_NAME %> - <%= item.COLOUR_NUMBER %>
+									</h1>
+									<h2 class="map__title">
+										<%= item.LOCATION %>
+									</h2>
+									<div class="color-square"
+										style="--r:<%= item.RGB_RED %>; --g:<%= item.RGB_GREEN %>; --b:<%= item.RGB_BLUE %>;">
+									</div>
+									<div class="pen__image">
+										<img src="images/polychrom-image/<%= item.IMAGE_1 %>" alt="<%= item.COLOUR_NAME %>">
+									</div>
+									<div class="card__content">
+										<p class="map_id">
+											Id: <%= item.item_id %>
+										</p>
+									</div>
+								</header>
+								<div class="card__actions">
+									<a href="/polychromosItem/<%= item.item_id %>" class="btn">Details</a>
+								</div>
+							</article>
+						<% } %>
+					</div>
+					<% } else { %>
+						<h1>No Polychromos found</h1>
+						<% } %>
+			</main>
+			<%- include('../includes/end.ejs') %>

@@ -69,6 +69,18 @@ exports.getScoreIndex = (req, res, next) => {
     	.catch(err => console.log(err));
 };
 
+exports.getPolychromosIndex = (req, res, next) => {
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/polychrom`)
+		.then((rows) => {
+			res.render('main-page/polychromos-list', {
+				items: rows,
+				pageTitle: 'Polychromos Pencils',
+				path: '/'
+			});
+		})
+    	.catch(err => console.log(err));
+};
+
 exports.getPenItem = (req, res, next) => {
 	const itemId = req.params.itemId;
 	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/pens/${itemId}`)
@@ -108,55 +120,15 @@ exports.getScoreItem = (req, res, next) => {
 	 	.catch(err => console.log(err));
 };
 
-/*
-exports.getCart = (req, res, next) => {
-	Cart.getCart(cart => {
-	Product.fetchAll(products => {
-		const cartProducts = [];
-		for (product of products) {
-		const cartProductData = cart.products.find(
-			prod => prod.id === product.id
-		);
-		if (cartProductData) {
-			cartProducts.push({ productData: product, qty: cartProductData.qty });
-		}
-		}
-		res.render('shop/cart', {
-		path: '/cart',
-		pageTitle: 'Your Cart',
-		products: cartProducts
-		});
-	});
-	});
+exports.getPolychromosItem = (req, res, next) => {
+	const itemId = req.params.itemId;
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/polychrom/${itemId}`)
+	 	.then((item) => {
+	 		res.render('main-page/polychrom-detail', {
+	 			item: item,
+	 			pageTitle: `${item.COLOUR_NAME}`,
+	 			path: '/'
+	 		});
+		})
+	 	.catch(err => console.log(err));
 };
-
-exports.postCart = (req, res, next) => {
-  const prodId = req.body.productId;
-  Product.findById(prodId, product => {
-    Cart.addProduct(prodId, product.price);
-  });
-  res.redirect('/cart');
-};
-
-exports.postCartDeleteProduct = (req, res, next) => {
-  const prodId = req.body.productId;
-  Product.findById(prodId, product => {
-    Cart.deleteProduct(prodId, product.price);
-    res.redirect('/cart');
-  });
-};
-
-exports.getOrders = (req, res, next) => {
-  res.render('shop/orders', {
-    path: '/orders',
-    pageTitle: 'Your Orders'
-  });
-};
-
-exports.getCheckout = (req, res, next) => {
-  res.render('shop/checkout', {
-    path: '/checkout',
-    pageTitle: 'Checkout'
-  });
-};
-*/

@@ -23,6 +23,9 @@ router.get('/inkItem/:itemId', displayController.getInkItem);
 router.get('/score', displayController.getScoreIndex);
 router.get('/scoreItem/:itemId', displayController.getScoreItem);
 
+router.get('/polychromos', displayController.getPolychromosIndex);
+router.get('/polychromosItem/:itemId', displayController.getPolychromosItem);
+
 /*
 router.get('/cart', displayController.getCart);
 

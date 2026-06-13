@@ -1,0 +1,51 @@
+<%- include('../includes/head.ejs') %>
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/css/collection-item.css">
+	</head>
+
+	<body>
+		<%- include('../includes/navigation.ejs') %>
+		<main class="centered">
+			<h1>
+				<%= item.COLOUR_NAME %> - <%= item.COLOUR_NUMBER %>
+			</h1>
+			<hr>
+			<div class="polychromos__layout">
+				<div class="polychromos__detail-column">
+
+					<div class="polychromos__detail">
+						<div class="colour-square colour-square-small"
+							style="--r:<%= item.RGB_RED %>; --g:<%= item.RGB_GREEN %>; --b:<%= item.RGB_BLUE %>;">
+						</div>
+						<div class="map__title"></div>
+					</div>
+
+					<div class="polychromos__detail">
+						<div class="colour-square colour-square-small"
+							style="--r:<%= item.RGB_RED %>; --g:0; --b:0;">
+						</div>
+						<div class="map__title">Red: <%= item.RGB_RED %></div>
+					</div>
+
+					<div class="polychromos__detail">
+						<div class="colour-square colour-square-small"
+							style="--r:0; --g:<%= item.RGB_GREEN %>; --b:0;">
+						</div>
+						<div class="map__title">Green: <%= item.RGB_GREEN %></div>
+					</div>
+
+					<div class="polychromos__detail">
+						<div class="colour-square colour-square-small"
+							style="--r:0; --g:0; --b:<%= item.RGB_BLUE %>;">
+						</div>
+						<div class="map__title">Blue: <%= item.RGB_BLUE %></div>
+					</div>
+
+				</div>
+					<div class="polychromos__image">
+						<img src="/images/polychrom-image/<%= item.IMAGE_1 %>" alt="BLX<%= item.COLOUR_NAME %>">
+					</div>
+				</div>
+			</div>
+		</main>
+		<%- include('../includes/end.ejs') %>

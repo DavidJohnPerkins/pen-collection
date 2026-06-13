@@ -17,8 +17,10 @@
 									<h2 class="map__title">
 										<%= item.LOCATION %>
 									</h2>
-									<div class="color-square"
-										style="--r:<%= item.RGB_RED %>; --g:<%= item.RGB_GREEN %>; --b:<%= item.RGB_BLUE %>;">
+									<div class="colour-wrapper">
+										<div class="colour-square colour-square-small"
+											style="--r:<%= item.RGB_RED %>; --g:<%= item.RGB_GREEN %>; --b:<%= item.RGB_BLUE %>;">
+										</div>
 									</div>
 									<div class="pen__image">
 										<img src="images/polychrom-image/<%= item.IMAGE_1 %>" alt="<%= item.COLOUR_NAME %>">

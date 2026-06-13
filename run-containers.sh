@@ -1,4 +1,10 @@
 #!/bin/bash
+stop_container() {
+    NAME=$1
+    echo "Stopping $NAME..."
+    docker stop "$NAME" >/dev/null 2>&1 || echo "$NAME was not running"
+    docker rm "$NAME" >/dev/null 2>&1 || echo "$NAME was not present"
+}
 
 run_container() {
     NAME=$1
@@ -13,7 +19,7 @@ run_container() {
         exit 1
     fi
 }
-
+stop_container "collection-api"
 run_container "collection-api" "collection-api" "-e DATABASE_URL=sqlserver://sa:D04v03tD@sql1:1433?encrypt=disable&database=Collections&instance=sql1 -p 8085:8080 --rm --network grls"
 # run_container "sql1" "mcr.microsoft.com/mssql/server:2022-latest" "-e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=D04v03tD' \
 # --rm \
@@ -21,6 +27,7 @@ run_container "collection-api" "collection-api" "-e DATABASE_URL=sqlserver://sa:
 # -v ~/sqlvolumes/data:/var/opt/mssql/data \
 # -v ~/sqlvolumes/log:/var/opt/mssql/log \
 # -v ~/sqlvolumes/secrets:/var/opt/mssql/secrets --network grls"
+stop_container "collection-frontend"
 run_container "collection-frontend" "collection-frontend" "-e MIDDLEWARE_URL=collection-api -e PORT=8080 -v /Users/davidperkins/public/collection-image:/app/images -p 4000:4000 --rm --network grls -d"
 
 echo "All containers running."

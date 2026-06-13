@@ -124,7 +124,7 @@ exports.getPolychromosItem = (req, res, next) => {
 	const itemId = req.params.itemId;
 	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/polychrom/${itemId}`)
 	 	.then((item) => {
-	 		res.render('main-page/polychrom-detail', {
+	 		res.render('main-page/polychromos-detail', {
 	 			item: item,
 	 			pageTitle: `${item.COLOUR_NAME}`,
 	 			path: '/'

@@ -1,11 +1,10 @@
-//const collection = require('../models/collection_dead');
 const dbfunc = require('../util/db_function');
 const { server, db } = require("../config");
 
 exports.getOSMapItem = (req, res, next) => {
 	const range = req.params.range;
 	const itemId = req.params.itemId;
-	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/maps/${range}/${itemId}`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/map/get?range=${range}&item_id=${itemId}`)
 		.then((item) => {
 			res.render('main-page/map-detail', {
 				item: item,
@@ -21,7 +20,7 @@ exports.getOSMapIndex = (req, res, next) => {
 	if (range === '') {
 		range = 'EXPLORER';
 	}
-	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/maps/${range}`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/maplist?range=${range}`)
 		.then((rows) => {
 			res.render('main-page/map-list', {
 				items: rows,
@@ -34,7 +33,7 @@ exports.getOSMapIndex = (req, res, next) => {
 };
 
 exports.getPenIndex = (req, res, next) => {
-	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/pens`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/penlist`)
 		.then((rows) => {
 			res.render('main-page/pen-list', {
 				items: rows,
@@ -45,45 +44,9 @@ exports.getPenIndex = (req, res, next) => {
 		.catch(err => console.log(err));
 };
 
-exports.getInkIndex = (req, res, next) => {
-	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/inks`)
-		.then((rows) => {
-			res.render('main-page/ink-list', {
-				items: rows,
-				pageTitle: 'Ink Collection',
-				path: '/'
-			});
-		})
-    	.catch(err => console.log(err));
-};
-
-exports.getScoreIndex = (req, res, next) => {
-	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/scores`)
-		.then((rows) => {
-			res.render('main-page/score-list', {
-				items: rows,
-				pageTitle: 'Score Collection',
-				path: '/'
-			});
-		})
-    	.catch(err => console.log(err));
-};
-
-exports.getPolychromosIndex = (req, res, next) => {
-	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/polychrom`)
-		.then((rows) => {
-			res.render('main-page/polychromos-list', {
-				items: rows,
-				pageTitle: 'Polychromos Pencils',
-				path: '/'
-			});
-		})
-    	.catch(err => console.log(err));
-};
-
 exports.getPenItem = (req, res, next) => {
 	const itemId = req.params.itemId;
-	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/pens/${itemId}`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/pen/get?item_id=${itemId}`)
 		.then((item) => {
 			res.render('main-page/pen-detail', {
 				item: item,
@@ -94,9 +57,21 @@ exports.getPenItem = (req, res, next) => {
     	.catch(err => console.log(err));
 };
 
+exports.getInkIndex = (req, res, next) => {
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/inklist`)
+		.then((rows) => {
+			res.render('main-page/ink-list', {
+				items: rows,
+				pageTitle: 'Ink Collection',
+				path: '/'
+			});
+		})
+    	.catch(err => console.log(err));
+};
+
 exports.getInkItem = (req, res, next) => {
 	const itemId = req.params.itemId;
-	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/inks/${itemId}`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/ink/get?item_id=${itemId}`)
 	 	.then((item) => {
 	 		res.render('main-page/ink-detail', {
 	 			item: item,
@@ -107,9 +82,21 @@ exports.getInkItem = (req, res, next) => {
 	 	.catch(err => console.log(err));
 };
 
+exports.getScoreIndex = (req, res, next) => {
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/scorelist`)
+		.then((rows) => {
+			res.render('main-page/score-list', {
+				items: rows,
+				pageTitle: 'Score Collection',
+				path: '/'
+			});
+		})
+    	.catch(err => console.log(err));
+};
+
 exports.getScoreItem = (req, res, next) => {
 	const itemId = req.params.itemId;
-	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/scores/${itemId}`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/score/get?item_id=${itemId}`)
 	 	.then((item) => {
 	 		res.render('main-page/score-detail', {
 	 			item: item,
@@ -120,9 +107,21 @@ exports.getScoreItem = (req, res, next) => {
 	 	.catch(err => console.log(err));
 };
 
+exports.getPolychromosIndex = (req, res, next) => {
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/polychromlist`)
+		.then((rows) => {
+			res.render('main-page/polychromos-list', {
+				items: rows,
+				pageTitle: 'Polychromos Pencils',
+				path: '/'
+			});
+		})
+    	.catch(err => console.log(err));
+};
+
 exports.getPolychromosItem = (req, res, next) => {
 	const itemId = req.params.itemId;
-	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/polychrom/${itemId}`)
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/polychrom/get?item_id=${itemId}`)
 	 	.then((item) => {
 	 		res.render('main-page/polychromos-detail', {
 	 			item: item,

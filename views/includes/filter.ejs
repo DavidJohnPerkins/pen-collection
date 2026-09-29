@@ -1,0 +1,20 @@
+<div class="backdrop"></div>
+
+<form class="filter-form" action="/filtered-index" method="GET">
+	<fieldset class="filter-flags">
+		<legend>Flags</legend>
+		<div class="filter-flag-grid">
+		<% for(var count = 0; count < location_list.length; count++) { %>
+			<label class="filter-flag">
+				<span><%= location_list[count].attr_value %></span>
+				<input type="checkbox" name="locations[]" value="<%= location_list[count].attr_value %>" <%= flags.includes(location_list[count].attr_value) ? 'checked' : '' %>>
+			</label>
+		<% } %>
+		</div>
+	</fieldset>
+	<div class="filter-actions">
+		<button class="btn" type="submit" value="accept">Filter</button>
+		<button class="btn" type="submit" name="reset" value="1">Reset</button>
+	</div>
+</form>
+

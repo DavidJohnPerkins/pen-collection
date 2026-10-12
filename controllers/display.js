@@ -1,6 +1,9 @@
 const dbfunc = require('../util/db_function');
 const { server, db } = require("../config");
 
+//
+// OS Maps functions
+//
 exports.getOSMapItem = (req, res, next) => {
 	const range = req.params.range;
 	const itemId = req.params.itemId;
@@ -32,6 +35,9 @@ exports.getOSMapIndex = (req, res, next) => {
     	.catch(err => console.log(err));
 };
 
+//
+// Pens functions
+//
 exports.getPenIndex = (req, res, next) => {
 	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/penlist`)
 		.then((rows) => {
@@ -57,6 +63,9 @@ exports.getPenItem = (req, res, next) => {
     	.catch(err => console.log(err));
 };
 
+//
+// Inks functions
+//
 exports.getInkIndex = (req, res, next) => {
 	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/inklist`)
 		.then((rows) => {
@@ -82,6 +91,9 @@ exports.getInkItem = (req, res, next) => {
 	 	.catch(err => console.log(err));
 };
 
+//
+// Scores functions
+//
 exports.getScoreIndex = (req, res, next) => {
 	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/scorelist`)
 		.then((rows) => {
@@ -107,6 +119,9 @@ exports.getScoreItem = (req, res, next) => {
 	 	.catch(err => console.log(err));
 };
 
+//
+// Polychromos functions
+//
 exports.getPolychromosIndex = (req, res, next) => {
 	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/polychromlist`)
 		.then((rows) => {
@@ -121,6 +136,23 @@ exports.getPolychromosIndex = (req, res, next) => {
 
 exports.getPolychromosItem = (req, res, next) => {
 	const itemId = req.params.itemId;
+	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/polychrom/get?item_id=${itemId}`)
+	 	.then((item) => {
+	 		res.render('main-page/polychromos-detail', {
+	 			item: item,
+	 			pageTitle: `${item.COLOUR_NAME}`,
+	 			path: '/'
+	 		});
+		})
+	 	.catch(err => console.log(err));
+};
+
+//
+// Helper functions
+//
+exports.getFilterValues = (req, res, next) => {
+	const collName = req.params.collName;
+	const dimName = req.params.dimName;
 	dbfunc.getData(`http://${db.url}:${server.port}/api/collection/polychrom/get?item_id=${itemId}`)
 	 	.then((item) => {
 	 		res.render('main-page/polychromos-detail', {
